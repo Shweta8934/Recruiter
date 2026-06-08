@@ -1,0 +1,173 @@
+// Dummy Subscription Plans Data
+import type { SubscriptionPlan, OrganizationSubscription } from '@/types/subscription'
+
+export const subscriptionPlans: SubscriptionPlan[] = [
+  {
+    id: 'plan-free',
+    name: 'Free',
+    slug: 'free',
+    price: 0,
+    billingCycle: 'monthly',
+    description: 'Perfect for getting started',
+    features: [
+      'Up to 5 team members',
+      'Basic dashboard',
+      '10 job postings',
+      'Email support',
+    ],
+    limits: {
+      maxMembers: 5,
+      maxRoles: 2,
+      maxInvitesPerMonth: 5,
+      maxJobs: 10,
+      maxCandidates: 50,
+      reportsAccess: false,
+      billingAccess: false,
+      customRoles: false,
+      apiAccess: false,
+    },
+  },
+  {
+    id: 'plan-starter',
+    name: 'Starter',
+    slug: 'starter',
+    price: 29,
+    billingCycle: 'monthly',
+    description: 'Great for small teams',
+    features: [
+      'Up to 15 team members',
+      'Full dashboard access',
+      '50 job postings',
+      'Basic reports',
+      'Priority email support',
+    ],
+    limits: {
+      maxMembers: 15,
+      maxRoles: 5,
+      maxInvitesPerMonth: 20,
+      maxJobs: 50,
+      maxCandidates: 200,
+      reportsAccess: true,
+      billingAccess: true,
+      customRoles: false,
+      apiAccess: false,
+    },
+  },
+  {
+    id: 'plan-professional',
+    name: 'Professional',
+    slug: 'professional',
+    price: 79,
+    billingCycle: 'monthly',
+    description: 'For growing businesses',
+    isPopular: true,
+    features: [
+      'Up to 50 team members',
+      'Custom roles & permissions',
+      'Unlimited job postings',
+      'Advanced analytics',
+      'API access',
+      'Phone & email support',
+    ],
+    limits: {
+      maxMembers: 50,
+      maxRoles: 20,
+      maxInvitesPerMonth: 100,
+      maxJobs: 999,
+      maxCandidates: 1000,
+      reportsAccess: true,
+      billingAccess: true,
+      customRoles: true,
+      apiAccess: true,
+    },
+  },
+  {
+    id: 'plan-enterprise',
+    name: 'Enterprise',
+    slug: 'enterprise',
+    price: 199,
+    billingCycle: 'monthly',
+    description: 'For large organizations',
+    features: [
+      'Unlimited team members',
+      'Unlimited custom roles',
+      'Unlimited everything',
+      'Dedicated account manager',
+      'Custom integrations',
+      'SLA guarantee',
+      '24/7 premium support',
+    ],
+    limits: {
+      maxMembers: 9999,
+      maxRoles: 9999,
+      maxInvitesPerMonth: 9999,
+      maxJobs: 9999,
+      maxCandidates: 9999,
+      reportsAccess: true,
+      billingAccess: true,
+      customRoles: true,
+      apiAccess: true,
+    },
+  },
+]
+
+export const organizationSubscriptions: OrganizationSubscription[] = [
+  {
+    id: 'sub-1',
+    organizationId: 'org-1',
+    planId: 'plan-professional',
+    status: 'active',
+    currentPeriodStart: '2024-05-01T00:00:00Z',
+    currentPeriodEnd: '2024-06-01T00:00:00Z',
+    cancelAtPeriodEnd: false,
+    createdAt: '2024-01-15T00:00:00Z',
+  },
+  {
+    id: 'sub-2',
+    organizationId: 'org-2',
+    planId: 'plan-enterprise',
+    status: 'active',
+    currentPeriodStart: '2024-05-10T00:00:00Z',
+    currentPeriodEnd: '2024-06-10T00:00:00Z',
+    cancelAtPeriodEnd: false,
+    createdAt: '2024-02-10T00:00:00Z',
+  },
+  {
+    id: 'sub-3',
+    organizationId: 'org-3',
+    planId: 'plan-starter',
+    status: 'active',
+    currentPeriodStart: '2024-05-05T00:00:00Z',
+    currentPeriodEnd: '2024-06-05T00:00:00Z',
+    cancelAtPeriodEnd: false,
+    createdAt: '2024-03-05T00:00:00Z',
+  },
+  {
+    id: 'sub-4',
+    organizationId: 'org-4',
+    planId: 'plan-free',
+    status: 'cancelled',
+    currentPeriodStart: '2024-04-20T00:00:00Z',
+    currentPeriodEnd: '2024-05-20T00:00:00Z',
+    cancelAtPeriodEnd: true,
+    createdAt: '2024-01-20T00:00:00Z',
+  },
+  {
+    id: 'sub-5',
+    organizationId: 'org-5',
+    planId: 'plan-professional',
+    status: 'active',
+    currentPeriodStart: '2024-05-12T00:00:00Z',
+    currentPeriodEnd: '2024-06-12T00:00:00Z',
+    cancelAtPeriodEnd: false,
+    createdAt: '2024-04-12T00:00:00Z',
+  },
+]
+
+export function getPlanById(id: string): SubscriptionPlan | undefined {
+  return subscriptionPlans.find(p => p.id === id)
+}
+
+export function getSubscriptionByOrganization(orgId: string): OrganizationSubscription | undefined {
+  return organizationSubscriptions.find(s => s.organizationId === orgId)
+}

@@ -1,0 +1,10 @@
+node_modules
+.next
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+recruit-ff240-firebase-adminsdk-fbsvc-e4156714e7.json
+*.json.key
+*.pem

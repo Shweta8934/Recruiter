@@ -164,9 +164,11 @@ export function AppHeader() {
       {/* Right side - Notifications and User menu */}
       <div className="flex items-center gap-4">
         {/* Notifications */}
+        {/* 
         <Button variant="ghost" size="icon" className="relative">
           <Bell className="h-5 w-5" />
         </Button>
+        */}
 
         {/* User Menu */}
         <DropdownMenu>

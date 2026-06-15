@@ -17,13 +17,8 @@ jobs:
       - name: Checkout latest code
         uses: actions/checkout@v4
 
-      - name: Navigate to app and deploy
-        working-directory: /www/wwwroot/ai-recruitment-platform
+      - name: Deploy Application
         run: |
-          echo "🔄 Pulling latest code from GitHub..."
-          git fetch --all
-          git reset --hard origin/main
-
           echo "🧹 Clearing old Next.js build cache..."
           sudo rm -rf .next node_modules/.cache
 

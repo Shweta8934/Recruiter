@@ -20,25 +20,25 @@ jobs:
       - name: Deploy Application
         run: |
           echo "🔄 Syncing new code to aaPanel directory..."
-          sudo rsync -av --exclude='.git' --exclude='node_modules' --exclude='.next' ./ /www/wwwroot/ai-recruitment-platform/
+          rsync -av --exclude='.git' --exclude='node_modules' --exclude='.next' ./ /www/wwwroot/ai-recruitment-platform/
           
           echo "📂 Moving to aaPanel directory..."
           cd /www/wwwroot/ai-recruitment-platform/
           
           echo "🧹 Clearing old Next.js build cache..."
-          sudo rm -rf .next node_modules/.cache
+          rm -rf .next node_modules/.cache
           
           echo "📥 Installing dependencies..."
-          sudo npm install
+          npm install
           
           echo "🗄️ Generating Prisma Client..."
-          sudo npx prisma generate
+          npx prisma generate
           
           echo "🏗️ Building the application..."
-          sudo npm run build
+          npm run build
           
           echo "♻️ Restarting process on port 3000..."
-          sudo fuser -k 3000/tcp || true
+          fuser -k 3000/tcp || true
           
           echo "🚀 Starting server..."
           RUNNER_TRACKING_ID="" nohup npm run start > server.log 2>&1 &

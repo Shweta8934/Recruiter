@@ -46,7 +46,7 @@ export default function CreateSkillPage() {
       },
       resolve: () => {
         toast.success('Skill created successfully');
-        router.push('/skills');
+        router.push(withBasePath('/skills'));
       },
       reject: (err) => {
         toast.error(err || 'Failed to create skill');

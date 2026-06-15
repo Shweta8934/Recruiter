@@ -80,7 +80,7 @@ function ResetPasswordForm() {
           </CardDescription>
         </CardHeader>
         <CardFooter>
-          <Button className="w-full" onClick={() => router.push('/login')}>
+          <Button className="w-full" onClick={() => router.push(withBasePath('/login'))}>
             Proceed to Login <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </CardFooter>

@@ -392,7 +392,7 @@ export default function OrganizationDashboardPage() {
                             type="button"
                             variant="outline"
                             size="sm"
-                            onClick={() => router.push('/organization/hfg/job-posts')}
+                            onClick={() => router.push(withBasePath('/organization/hfg/job-posts'))}
                           >
                             Show All Jobs
                           </Button>

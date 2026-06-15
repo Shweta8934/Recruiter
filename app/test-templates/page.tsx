@@ -47,7 +47,7 @@ export default function TestTemplates() {
       payload: { organizationId: user.organizationId, createdById: user.id },
       resolve: () => {
         toast.success('Template cloned successfully!')
-        router.push('/question-papers')
+        router.push(withBasePath('/question-papers'))
         setIsCloning(null)
       },
       reject: () => {
@@ -76,7 +76,7 @@ export default function TestTemplates() {
         toast.success(data.message || 'File uploaded successfully')
         setUploadFile(null)
         if (uploadType !== 'candidate') {
-          router.push('/question-papers')
+          router.push(withBasePath('/question-papers'))
         }
       },
       reject: (errData) => {

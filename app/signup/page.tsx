@@ -67,7 +67,7 @@ export default function SignupPage() {
     })
     
     if (result.success) {
-      router.push('/member/dashboard')
+      router.push(withBasePath('/member/dashboard'))
     } else {
       setError(result.error || 'Signup failed')
     }

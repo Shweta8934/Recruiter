@@ -138,7 +138,7 @@ export default function RoleDetailPage({
         setIsDeleting(false);
         setIsDeleteDialogOpen(false);
         toast.success(`Role "${role.name}" deleted successfully`);
-        router.push('/roles');
+        router.push(withBasePath('/roles'));
       },
       reject: (err: string) => {
         setIsDeleting(false);

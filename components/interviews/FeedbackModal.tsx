@@ -96,7 +96,7 @@ export function FeedbackModal({ open, onOpenChange, interviewId, templateId, onS
 
     if (existingFeedback) {
       try {
-        const res = await fetch(`/api/interviews/${interviewId}/feedback`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || '/ai-recruitment-platform'}/api/interviews/${interviewId}/feedback`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ recommendation, comments, scores: payloadScores }),

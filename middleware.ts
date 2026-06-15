@@ -82,7 +82,8 @@ export default async function proxy(request: NextRequest) {
     if (isApiRoute) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
-    const loginUrl = new URL('/login', request.url)
+    const loginUrl = request.nextUrl.clone()
+    loginUrl.pathname = '/login'
     const originalPathWithQuery = pathname + request.nextUrl.search
     loginUrl.searchParams.set('redirect', originalPathWithQuery)
     return NextResponse.redirect(loginUrl)
@@ -95,7 +96,8 @@ export default async function proxy(request: NextRequest) {
     if (isApiRoute) {
       return NextResponse.json({ error: 'Unauthorized or token expired' }, { status: 401 })
     }
-    const loginUrl = new URL('/login', request.url)
+    const loginUrl = request.nextUrl.clone()
+    loginUrl.pathname = '/login'
     const response = NextResponse.redirect(loginUrl)
     response.cookies.delete('session')
     return response

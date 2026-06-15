@@ -31,7 +31,7 @@ export function ProtectedRoute({
   // Detect if there's a tenant mismatch (pending sync)
   const hostname = typeof window !== 'undefined' ? window.location.hostname : undefined
   const tenantSlugInUrl = getTenantSlugFromUrl(pathname, hostname)
-  
+
   // Check membership
   const hasMembership = useMemo(() => {
     if (!tenantSlugInUrl || isSuperAdmin) return true

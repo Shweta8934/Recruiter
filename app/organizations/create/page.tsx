@@ -50,7 +50,7 @@ export default function CreateOrganizationPage() {
       },
       resolve: () => {
         toast.success('Organization created successfully!')
-        router.push('/organizations')
+        router.push(withBasePath('/organizations'))
       },
       reject: (errorMsg) => {
         toast.error(errorMsg || 'Create failed')

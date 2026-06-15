@@ -37,7 +37,7 @@ export function RecruiterNotesClient({
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/job-posts/${jobId}/applications/${applicationId}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || '/ai-recruitment-platform'}/api/job-posts/${jobId}/applications/${applicationId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

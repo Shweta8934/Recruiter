@@ -28,7 +28,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(() => {
     if (typeof window !== 'undefined' && typeof navigator !== 'undefined') {
       // sendBeacon ensures the logout request completes even during page navigation
-      navigator.sendBeacon('/api/auth/logout')
+      const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/ai-recruitment-platform';
+      navigator.sendBeacon(`${basePath}/api/auth/logout`)
     }
     dispatch(logoutAction())
     clearStoredUser()

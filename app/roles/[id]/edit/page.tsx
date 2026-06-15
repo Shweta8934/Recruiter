@@ -47,7 +47,7 @@ export default function EditRolePage() {
       resolve: (role) => {
         if (!role) {
           toast.error('Role not found')
-          router.push('/roles')
+          router.push(withBasePath('/roles'))
           return
         }
         setName(role.name ?? '')
@@ -58,7 +58,7 @@ export default function EditRolePage() {
       },
       reject: () => {
         toast.error('Role not found')
-        router.push('/roles')
+        router.push(withBasePath('/roles'))
       }
     }))
   }, [id, router, dispatch])

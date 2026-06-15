@@ -14,7 +14,12 @@ const MAX_ATTEMPTS = 5
 const LOCK_DURATION_MS = 15 * 60 * 1000 // 15 minutes
 
 export async function POST(req: Request) {
-  const payload = schema.parse(await req.json())
+  let payload;
+  try {
+    payload = schema.parse(await req.json())
+  } catch (parseError: any) {
+    return NextResponse.json({ error: 'Invalid request payload (Zod or JSON error)', details: parseError.message }, { status: 400 })
+  }
 
   // Verify Firebase token to get the email
   let decodedToken: any;
@@ -139,6 +144,9 @@ export async function POST(req: Request) {
     roleSlug: finalRoleSlug,
   })
 
+  // Determine if the connection is actually secure (https) or if it's running locally/over LAN
+  const isSecure = process.env.NODE_ENV === 'production' && req.headers.get('x-forwarded-proto') === 'https';
+
   // Set the httpOnly cookie for Next.js Middleware to consume
   const cookieStore = await cookies()
   const accessToken = await signAccessToken({
@@ -156,7 +164,7 @@ export async function POST(req: Request) {
     name: 'session',
     value: token,
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: isSecure,
     sameSite: 'lax',
     path: '/',
     maxAge: 7 * 24 * 60 * 60, // 7 days
@@ -165,7 +173,7 @@ export async function POST(req: Request) {
     name: 'access_token',
     value: accessToken,
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: isSecure,
     sameSite: 'lax',
     path: '/',
     maxAge: 15 * 60,
@@ -174,7 +182,7 @@ export async function POST(req: Request) {
     name: 'refresh_token',
     value: refreshToken,
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: isSecure,
     sameSite: 'lax',
     path: '/',
     maxAge: 7 * 24 * 60 * 60,

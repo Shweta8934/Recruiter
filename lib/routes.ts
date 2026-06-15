@@ -115,14 +115,14 @@ export function getDashboardRouteForRole(roleSlug: string): string {
 
 // Check if a route is public
 export function isPublicRoute(path: string): boolean {
-  return PUBLIC_ROUTES.some(route => 
+  return PUBLIC_ROUTES.some(route =>
     path === route || path.startsWith(`${route}/`)
   )
 }
 
 // Get route config for a path
 export function getRouteConfig(path: string): RouteConfig | undefined {
-  return PROTECTED_ROUTES.find(route => 
+  return PROTECTED_ROUTES.find(route =>
     path === route.path || path.startsWith(`${route.path}/`)
   )
 }

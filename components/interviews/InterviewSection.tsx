@@ -55,7 +55,7 @@ export function InterviewSection({ applicationId, organizationId, jobId, users, 
 
     setLoading(true);
     try {
-      const res = await fetch(`/api/interviews/${interviewId}/feedback`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_PATH || '/ai-recruitment-platform'}/api/interviews/${interviewId}/feedback`, {
         method: 'DELETE'
       });
       const data = await res.json();

@@ -19,6 +19,9 @@ jobs:
 
       - name: Deploy Application
         run: |
+          echo "📄 Copying .env file from server..."
+          cp /www/wwwroot/ai-recruitment-platform/.env ./.env || echo "⚠️ Warning: .env file not found in /www/wwwroot/ai-recruitment-platform"
+
           echo "🧹 Clearing old Next.js build cache..."
           sudo rm -rf .next node_modules/.cache
 

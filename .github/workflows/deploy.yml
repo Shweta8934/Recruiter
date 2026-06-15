@@ -19,9 +19,10 @@ jobs:
 
       - name: Deploy Application
         run: |
-          echo "📄 Copying .env and prisma folder from server..."
+          echo "📄 Copying .env, prisma folder, and Firebase key from server..."
           cp /www/wwwroot/ai-recruitment-platform/.env ./.env || echo "⚠️ Warning: .env file not found"
           cp -r /www/wwwroot/ai-recruitment-platform/prisma ./ || echo "⚠️ Warning: prisma folder not found"
+          cp /www/wwwroot/ai-recruitment-platform/recruit-*.json ./ || echo "⚠️ Warning: Firebase JSON key not found"
 
           echo "🧹 Clearing old Next.js build cache..."
           sudo rm -rf .next node_modules/.cache

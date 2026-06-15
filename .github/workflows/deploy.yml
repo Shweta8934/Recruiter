@@ -28,18 +28,18 @@ jobs:
           sudo rm -rf .next node_modules/.cache
 
           echo "📥 Installing dependencies..."
-          npm install
-
+          sudo npm install
+          
           echo "🗄️ Generating Prisma Client..."
-          npx prisma generate
-
+          sudo npx prisma generate
+          
           echo "🏗️ Building the application..."
-          npm run build
-
+          sudo npm run build
+          
           echo "♻️ Restarting process on port 3000..."
           sudo fuser -k 3000/tcp || true
-
-          echo "🚀 Starting server with npm run start in background..."
-          nohup npm run start > server.log 2>&1 &
-
+          
+          echo "🚀 Starting server..."
+          RUNNER_TRACKING_ID="" nohup npm run start > server.log 2>&1 &
+          
           echo "✅ Deployment complete!"

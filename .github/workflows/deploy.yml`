@@ -1,0 +1,43 @@
+name: Deploy to aaPanel Server
+
+on:
+  push:
+    branches:
+      - main        # triggers on push to main branch
+  workflow_dispatch: # allows manual trigger
+
+jobs:
+  deploy:
+    name: Build & Deploy
+    runs-on: self-hosted
+
+    steps:
+      - name: Deploy to Server
+        run: |
+          echo "📦 Navigating to app directory..."
+          cd ${{ secrets.APP_PATH }}
+
+          echo "🔄 Pulling latest code from GitHub..."
+          git fetch --all
+          git reset --hard origin/main
+
+          echo "🧹 Clearing old Next.js build cache..."
+          echo ${{ secrets.SSH_PASSWORD }} | sudo -S rm -rf .next
+          echo ${{ secrets.SSH_PASSWORD }} | sudo -S rm -rf node_modules/.cache
+
+          echo "📥 Installing dependencies..."
+          echo ${{ secrets.SSH_PASSWORD }} | sudo -S npm install
+
+          echo "🗄️ Generating Prisma Client..."
+          echo ${{ secrets.SSH_PASSWORD }} | sudo -S npx prisma generate
+
+          echo "🏗️ Building the application..."
+          npm run build
+
+          echo "♻️ Restarting process on port 3000..."
+          echo ${{ secrets.SSH_PASSWORD }} | sudo -S fuser -k 3000/tcp || true
+          
+          echo "🚀 Starting server with npm run start in background..."
+          nohup npm run start > server.log 2>&1 &
+
+          echo "✅ Deployment complete!"

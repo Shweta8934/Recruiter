@@ -9,43 +9,37 @@ on:
 jobs:
   deploy:
     name: Build & Deploy
-    runs-on: ubuntu-latest
+    # Self-hosted runner runs directly on your VirtualBox VM
+    # No SSH needed — the runner connects outward to GitHub
+    runs-on: self-hosted
 
     steps:
-      - name: Deploy to Server
-        uses: appleboy/ssh-action@v1.0.3
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USERNAME }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          envs: APP_PATH
-          script: |
-            echo "📦 Navigating to app directory..."
-            cd $APP_PATH
+      - name: Checkout latest code
+        uses: actions/checkout@v4
 
-            echo "🔄 Pulling latest code from GitHub..."
-            git fetch --all
-            git reset --hard origin/main
+      - name: Navigate to app and deploy
+        working-directory: /www/wwwroot/ai-recruitment-platform
+        run: |
+          echo "🔄 Pulling latest code from GitHub..."
+          git fetch --all
+          git reset --hard origin/main
 
-            echo "🧹 Clearing old Next.js build cache..."
-            sudo rm -rf .next node_modules/.cache
+          echo "🧹 Clearing old Next.js build cache..."
+          sudo rm -rf .next node_modules/.cache
 
-            echo "📥 Installing dependencies..."
-            npm install
+          echo "📥 Installing dependencies..."
+          npm install
 
-            echo "🗄️ Generating Prisma Client..."
-            npx prisma generate
+          echo "🗄️ Generating Prisma Client..."
+          npx prisma generate
 
-            echo "🏗️ Building the application..."
-            npm run build
+          echo "🏗️ Building the application..."
+          npm run build
 
-            echo "♻️ Restarting process on port 3000..."
-            sudo fuser -k 3000/tcp || true
+          echo "♻️ Restarting process on port 3000..."
+          sudo fuser -k 3000/tcp || true
 
-            echo "🚀 Starting server with npm run start in background..."
-            nohup npm run start > server.log 2>&1 &
+          echo "🚀 Starting server with npm run start in background..."
+          nohup npm run start > server.log 2>&1 &
 
-            echo "✅ Deployment complete!"
-        env:
-          APP_PATH: ${{ secrets.APP_PATH }}
+          echo "✅ Deployment complete!"

@@ -118,7 +118,7 @@ export default function QuestionPapersList() {
         description="Manage assessment question papers and tests."
       >
         {canCreate && (
-          <Button onClick={() => router.push('/question-papers/generate')}>
+          <Button onClick={() => router.push(withBasePath('/question-papers/generate'))}>
             <Plus className="mr-2 h-4 w-4" />
             Generate New Paper
           </Button>
@@ -147,7 +147,7 @@ export default function QuestionPapersList() {
             {searchQuery ? "No results match your search." : "Create your first question paper to start assessing candidates."}
           </p>
           {canCreate && !searchQuery && (
-            <Button onClick={() => router.push('/question-papers/generate')} variant="outline">
+            <Button onClick={() => router.push(withBasePath('/question-papers/generate'))} variant="outline">
               <Plus className="mr-2 h-4 w-4" />
               Generate Paper
             </Button>

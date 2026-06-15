@@ -153,7 +153,7 @@ export default function EditJobPost() {
     dispatch(jobsActions.deleteJobPostRequest({
       id,
       resolve: () => {
-        router.push('/job-posts');
+        router.push(withBasePath('/job-posts'));
       }
     }));
   }

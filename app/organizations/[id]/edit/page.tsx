@@ -39,7 +39,7 @@ export default function EditOrganizationPage() {
         },
         reject: () => {
           toast.error('Organization not found')
-          router.push('/organizations')
+          router.push(withBasePath('/organizations'))
         }
       }))
     }

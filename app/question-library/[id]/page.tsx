@@ -23,7 +23,7 @@ export default function QuestionDetailPage() {
   }, [id, user?.organizationId, dispatch])
 
   return <DashboardLayout><div className='space-y-6 max-w-5xl'>
-    <button className='flex items-center gap-3 text-left' onClick={() => router.push('/question-library')}>
+    <button className='flex items-center gap-3 text-left' onClick={() => router.push(withBasePath('/question-library'))}>
       <ArrowLeft className='h-4 w-4 text-muted-foreground' />
       <span>
         <span className='block text-3xl font-semibold leading-tight'>Question Details</span>

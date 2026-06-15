@@ -79,7 +79,7 @@ export default function QuestionLibraryPage() {
     <DashboardLayout>
       <div className='space-y-6'>
         <PageHeader title='Question Library' description='A private bank of reusable questions. Add them to any test paper without affecting past assessments.'>
-          {canManage && <><Button variant='outline' onClick={() => router.push('/question-library/ai')}><Sparkles className='mr-2 h-4 w-4' /> Generate with AI</Button><Button onClick={() => router.push('/question-library/new')}><Plus className='mr-2 h-4 w-4' /> Add Question</Button></>}
+          {canManage && <><Button variant='outline' onClick={() => router.push(withBasePath('/question-library/ai'))}><Sparkles className='mr-2 h-4 w-4' /> Generate with AI</Button><Button onClick={() => router.push(withBasePath('/question-library/new'))}><Plus className='mr-2 h-4 w-4' /> Add Question</Button></>}
         </PageHeader>
 
         <div className='grid grid-cols-2 sm:grid-cols-4 gap-4'>

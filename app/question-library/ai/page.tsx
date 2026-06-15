@@ -26,7 +26,7 @@ export default function AIGenerateLibraryQuestionPage() {
   return (
     <DashboardLayout>
       <div className='space-y-6 max-w-5xl'>
-        <button className='flex items-center gap-3 text-left' onClick={() => router.push('/question-library')}>
+        <button className='flex items-center gap-3 text-left' onClick={() => router.push(withBasePath('/question-library'))}>
           <ArrowLeft className='h-4 w-4 text-muted-foreground' />
           <span>
             <span className='block text-3xl font-semibold leading-tight'>Generate with AI</span>
@@ -66,7 +66,7 @@ export default function AIGenerateLibraryQuestionPage() {
               },
               resolve: () => {
                 pending -= 1
-                if (pending === 0) router.push('/question-library')
+                if (pending === 0) router.push(withBasePath('/question-library'))
               }
             })))
           }}

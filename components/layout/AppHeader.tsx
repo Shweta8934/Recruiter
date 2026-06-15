@@ -81,7 +81,7 @@ export function AppHeader() {
     dispatch(authActions.logoutAllRequest({
       resolve: () => {
         logout()
-        router.push('/login')
+        router.push(`${process.env.NEXT_PUBLIC_BASE_PATH || ''}/login`)
       }
     }))
   }
@@ -151,70 +151,70 @@ export function AppHeader() {
             )}
             */}
             <span className="text-sm font-medium">{activeOrg?.name}</span>
-    </div>
-  )}
+          </div>
+        )}
 
-  {isSuperAdmin && (
-    <Badge variant="outline" className="bg-amber-100 text-amber-800 border-amber-200">
-      Super Admin
-    </Badge>
-  )}
-</div>
+        {isSuperAdmin && (
+          <Badge variant="outline" className="bg-amber-100 text-amber-800 border-amber-200">
+            Super Admin
+          </Badge>
+        )}
+      </div>
 
-{/* Right side - Notifications and User menu */}
-<div className="flex items-center gap-4">
-  {/* Notifications */}
-  <Button variant="ghost" size="icon" className="relative">
-    <Bell className="h-5 w-5" />
-  </Button>
+      {/* Right side - Notifications and User menu */}
+      <div className="flex items-center gap-4">
+        {/* Notifications */}
+        <Button variant="ghost" size="icon" className="relative">
+          <Bell className="h-5 w-5" />
+        </Button>
 
-  {/* User Menu */}
-  <DropdownMenu>
-    <DropdownMenuTrigger asChild>
-      <Button variant="ghost" className="flex items-center gap-3 pl-2 pr-3">
-        <Avatar className="h-8 w-8">
-          {user.avatar && <AvatarImage src={user.avatar} />}
-          <AvatarFallback className="bg-primary text-primary-foreground text-xs">
-            {initials}
-          </AvatarFallback>
-        </Avatar>
-        <div className="hidden text-left md:block">
-          <p className="text-sm font-medium">{user.name}</p>
-          <p className="text-xs text-muted-foreground">{roleName}</p>
-        </div>
-      </Button>
-    </DropdownMenuTrigger>
-    <DropdownMenuContent align="end" className="w-56">
-      <DropdownMenuLabel>
-        <div className="flex flex-col space-y-1">
-          <p className="text-sm font-medium">{user.name}</p>
-          <p className="text-xs text-muted-foreground">{user.email}</p>
-        </div>
-      </DropdownMenuLabel>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem onClick={() => router.push('/profile')}>
-        <User className="mr-2 h-4 w-4" />
-        Profile
-      </DropdownMenuItem>
-      <DropdownMenuItem onClick={() => router.push('/settings')}>
-        <Settings className="mr-2 h-4 w-4" />
-        Settings
-      </DropdownMenuItem>
-      <DropdownMenuSeparator />
-      <DropdownMenuItem
-        onClick={handleLogoutAll}
-        className="text-muted-foreground focus:text-foreground cursor-pointer"
-      >
-        <MonitorOff className="mr-2 h-4 w-4" />
-        Sign out of all devices
-      </DropdownMenuItem>
-      <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive cursor-pointer">
-        <LogOut className="mr-2 h-4 w-4" />
-        Log out
-      </DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
-</div>
-</header>
+        {/* User Menu */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" className="flex items-center gap-3 pl-2 pr-3">
+              <Avatar className="h-8 w-8">
+                {user.avatar && <AvatarImage src={user.avatar} />}
+                <AvatarFallback className="bg-primary text-primary-foreground text-xs">
+                  {initials}
+                </AvatarFallback>
+              </Avatar>
+              <div className="hidden text-left md:block">
+                <p className="text-sm font-medium">{user.name}</p>
+                <p className="text-xs text-muted-foreground">{roleName}</p>
+              </div>
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="w-56">
+            <DropdownMenuLabel>
+              <div className="flex flex-col space-y-1">
+                <p className="text-sm font-medium">{user.name}</p>
+                <p className="text-xs text-muted-foreground">{user.email}</p>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => router.push('/profile')}>
+              <User className="mr-2 h-4 w-4" />
+              Profile
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => router.push('/settings')}>
+              <Settings className="mr-2 h-4 w-4" />
+              Settings
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem
+              onClick={handleLogoutAll}
+              className="text-muted-foreground focus:text-foreground cursor-pointer"
+            >
+              <MonitorOff className="mr-2 h-4 w-4" />
+              Sign out of all devices
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive cursor-pointer">
+              <LogOut className="mr-2 h-4 w-4" />
+              Log out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </header>
   )
 }

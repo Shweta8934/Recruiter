@@ -625,7 +625,7 @@ export default function CareerApplyPage() {
               <Button
                 variant="outline"
                 className="mt-6 rounded-full px-8 py-6 font-semibold"
-                onClick={() => router.push('/careers')}
+                onClick={() => router.push(withBasePath('/careers'))}
               >
                 Return to Careers
               </Button>

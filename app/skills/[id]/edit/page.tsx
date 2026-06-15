@@ -37,7 +37,7 @@ export default function EditSkillPage() {
       },
       reject: () => {
         toast.error('Skill not found');
-        router.push('/skills');
+        router.push(withBasePath('/skills'));
       }
     }));
   }, [id, router, dispatch]);
@@ -60,7 +60,7 @@ export default function EditSkillPage() {
       payload: { name: trimmedName, isActive },
       resolve: () => {
         toast.success('Skill updated successfully');
-        router.push('/skills');
+        router.push(withBasePath('/skills'));
       },
       reject: (err) => {
         toast.error(err || 'Failed to update skill');

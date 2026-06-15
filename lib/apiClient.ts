@@ -1,6 +1,10 @@
 import { getStoredToken } from './auth';
 
 export async function fetchJson(url: string, options: RequestInit = {}) {
+  if (url.startsWith('/api/')) {
+    const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '/ai-recruitment-platform';
+    url = `${basePath}${url}`;
+  }
   const token = getStoredToken();
   const headers = new Headers(options.headers || {});
   headers.set('ngrok-skip-browser-warning', 'true');

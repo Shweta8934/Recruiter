@@ -121,7 +121,7 @@ export default function OrganizationDetailPage() {
           setLoading(false)
         },
         reject: () => {
-          router.push('/organizations')
+          router.push(withBasePath('/organizations'))
         }
       }))
     }
@@ -148,7 +148,7 @@ export default function OrganizationDetailPage() {
         setIsDeleting(false)
         setDeleteModalOpen(false)
         toast.success('Organization deleted')
-        router.push('/organizations')
+        router.push(withBasePath('/organizations'))
       },
       reject: (err: string) => {
         setIsDeleting(false)

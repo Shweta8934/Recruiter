@@ -65,7 +65,7 @@ export default function UserDetailPage() {
         setLoading(false);
       },
       reject: () => {
-        router.push('/');
+        router.push(withBasePath('/'));
       }
     }));
   }, [id, router, dispatch])

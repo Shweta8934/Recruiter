@@ -2,9 +2,6 @@ import path from 'path'
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
-  basePath: '/ai-recruit',
-  assetPrefix: '/ai-recruit/',
   typescript: {
     ignoreBuildErrors: true,
   },
@@ -17,6 +14,7 @@ const nextConfig = {
   turbopack: {
     root: path.resolve('./'),
   },
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '/ai-recruitment-platform',
   // Note: allowedDevOrigins is not a standard Next.js config key, keeping it to avoid breaking custom setups.
   allowedDevOrigins: [
     '10.0.0.17',

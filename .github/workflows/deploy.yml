@@ -18,31 +18,34 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT || 22 }}
+          port: 22
+          envs: APP_PATH
           script: |
             echo "📦 Navigating to app directory..."
-            cd ${{ secrets.APP_PATH }}
-            
+            cd $APP_PATH
+
             echo "🔄 Pulling latest code from GitHub..."
             git fetch --all
             git reset --hard origin/main
-            
+
             echo "🧹 Clearing old Next.js build cache..."
             sudo rm -rf .next node_modules/.cache
-            
+
             echo "📥 Installing dependencies..."
             npm install
-            
+
             echo "🗄️ Generating Prisma Client..."
             npx prisma generate
-            
+
             echo "🏗️ Building the application..."
             npm run build
-            
+
             echo "♻️ Restarting process on port 3000..."
             sudo fuser -k 3000/tcp || true
-            
+
             echo "🚀 Starting server with npm run start in background..."
             nohup npm run start > server.log 2>&1 &
-            
+
             echo "✅ Deployment complete!"
+        env:
+          APP_PATH: ${{ secrets.APP_PATH }}

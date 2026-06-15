@@ -19,14 +19,15 @@ jobs:
 
       - name: Deploy Application
         run: |
-          echo "📄 Copying .env, prisma folder, and Firebase key from server..."
-          cp /www/wwwroot/ai-recruitment-platform/.env ./.env || echo "⚠️ Warning: .env file not found"
-          cp -r /www/wwwroot/ai-recruitment-platform/prisma ./ || echo "⚠️ Warning: prisma folder not found"
-          cp /www/wwwroot/ai-recruitment-platform/recruit-*.json ./ || echo "⚠️ Warning: Firebase JSON key not found"
-
+          echo "🔄 Syncing new code to aaPanel directory..."
+          sudo rsync -av --exclude='.git' --exclude='node_modules' --exclude='.next' ./ /www/wwwroot/ai-recruitment-platform/
+          
+          echo "📂 Moving to aaPanel directory..."
+          cd /www/wwwroot/ai-recruitment-platform/
+          
           echo "🧹 Clearing old Next.js build cache..."
           sudo rm -rf .next node_modules/.cache
-
+          
           echo "📥 Installing dependencies..."
           sudo npm install
           
@@ -42,4 +43,4 @@ jobs:
           echo "🚀 Starting server..."
           RUNNER_TRACKING_ID="" nohup npm run start > server.log 2>&1 &
           
-          echo "✅ Deployment complete!"
+          echo "✅ Deployment complete! Code updated in aaPanel."
